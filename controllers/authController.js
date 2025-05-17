@@ -15,12 +15,8 @@ export const signup = catchAsync(async (req, res, next) => {
         "password"
     );
 
-    await User.create([filteredBody]);
-
-    res.status(201).json({
-        status: httpStatusText.SUCCESS,
-        message: "User signed up!",
-    });
+    const user = await User.create([filteredBody]);
+    sendTokenResponse(user, 200, res);
 });
 
 export const Login = catchAsync(async (req, res, next) => {

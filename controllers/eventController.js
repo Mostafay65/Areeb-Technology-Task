@@ -13,6 +13,7 @@ export const getAllEvents = catchAsync(async (req, res, next) => {
     res.status(200).json({
         status: "success",
         results: events.length,
+        total: await Event.countDocuments(),
         data: {
             events,
         },
@@ -37,7 +38,7 @@ export const createEvent = catchAsync(async (req, res, next) => {
         req.body,
         "name",
         "description",
-        "Category",
+        "category",
         "date",
         "images",
         "venue",
